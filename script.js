@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         pipeWidth = canvas.width * 0.125;
         pipeGap = canvas.height * 0.25;
 
-        // Log bird's initial position
         console.log(`Bird initial position: x=${bird.x}, y=${bird.y}, width=${bird.width}, height=${bird.height}`);
     }
 
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         width: 0,
         height: 0,
         gravity: 0.4,
-        lift: isMobile ? -8 : -6, // Higher jump on mobile (-8) vs desktop (-6)
+        lift: isMobile ? -8 : -6, // Higher jump on mobile
         velocity: -3
     };
 
@@ -163,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.counted = false;
     }
 
-    // Game loop (reverted to original, without delta time for now)
+    // Game loop (reverted to simple version)
     function gameLoop() {
         if (!gameRunning) return;
 
