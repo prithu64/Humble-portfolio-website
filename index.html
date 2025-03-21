@@ -32,15 +32,18 @@
             </div>
             
             <div id="play-game">
-              <button onclick="">Play game ??</button>
+              <button id="playButton" >Play game ??</button>
             </div>
-                
-            <div style="display: none;" class="color-div">
-               <h4>Pick a color</h4>
-               <p style="display: none;">Great...now it's ruined!</p>
-               <input type="color" id="color-picker" onchange="" value="#0084ff" />
-               <button style="display: none;" onclick="">Reset</button>
+            
+           
+            <div id="gameModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">×</span>
+                    <canvas id="gameCanvas"></canvas>
+                </div>
             </div>
+
+           
 
         </section>
 
@@ -142,6 +145,6 @@
     <footer>
         <p>By <a href="https://github.com/prithu64" target="_blank">Prachurjya Goswami</a> ✨ the repo on <a target="_blank">GitHub</a></p>
     </footer>
-    
+    <script src="script.js"></script>
 </body>
 </html>
