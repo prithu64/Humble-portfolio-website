@@ -13,10 +13,11 @@ header {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    max-width: 800px;
     margin: auto;
+    max-width: 800px;
+    justify-content: space-between;
+    
 }
 
 header a {
@@ -130,7 +131,7 @@ main {
     }
 
     header {
-        flex-direction: column;
+        flex-direction: row;
         text-align: center;
     }
 
@@ -150,40 +151,4 @@ footer {
     font-size: 12px;
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
 
-.modal-content {
-    background-color: #222;
-    padding: 10px;
-    border: 2px solid white;
-    position: relative;
-}
-
-.close {
-    color: white;
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Game Canvas */
-canvas {
-    background-color: #f4f4f4;
-    display: block;
-    width: 500px;
-    height: 200px;
-}
