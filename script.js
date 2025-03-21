@@ -1,18 +1,34 @@
+console.log('game.js loaded');
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
 
     // Modal setup
     const modal = document.getElementById('gameModal');
+    if (!modal) {
+        console.error('Modal element not found');
+        return;
+    }
     const playButton = document.getElementById('playButton');
+    if (!playButton) {
+        console.error('Play button not found');
+        return;
+    }
     const closeButton = document.querySelector('.close');
+    if (!closeButton) {
+        console.error('Close button not found');
+        return;
+    }
 
     playButton.addEventListener('click', () => {
+        console.log('Play button clicked');
         modal.style.display = 'flex';
         console.log('Modal opened');
         initializeGame();
     });
 
     closeButton.addEventListener('click', () => {
+        console.log('Close button clicked');
         modal.style.display = 'none';
         console.log('Modal closed');
         resetGame();
@@ -20,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
+            console.log('Clicked outside modal');
             modal.style.display = 'none';
             console.log('Modal closed by clicking outside');
             resetGame();
@@ -38,6 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     console.log('Canvas and context initialized');
+
+    // Detect if the user is on a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    console.log('Is mobile device:', isMobile);
 
     // Set canvas size dynamically
     function resizeCanvas() {
@@ -61,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bird.height = canvas.height * 0.033;
         pipeWidth = canvas.width * 0.125;
         pipeGap = canvas.height * 0.25;
+
+        // Log bird's initial position
+        console.log(`Bird initial position: x=${bird.x}, y=${bird.y}, width=${bird.width}, height=${bird.height}`);
     }
 
     // Bird properties
@@ -70,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         width: 0,
         height: 0,
         gravity: 0.4,
-        lift: -6,
+        lift: isMobile ? -8 : -6, // Higher jump on mobile (-8) vs desktop (-6)
         velocity: -3
     };
 
@@ -87,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize game
     function initializeGame() {
+        console.log('Initializing game');
         resizeCanvas();
         window.addEventListener('resize', () => {
             resizeCanvas();
@@ -138,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.counted = false;
     }
 
-    // Game loop
+    // Game loop (reverted to original, without delta time for now)
     function gameLoop() {
         if (!gameRunning) return;
 
@@ -163,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Draw bird
         ctx.fillStyle = 'yellow';
         ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+        console.log(`Drawing bird at x=${bird.x}, y=${bird.y}, width=${bird.width}, height=${bird.height}`);
 
         // Generate pipes
         if (frameCount % pipeFrequency === 0) {
@@ -249,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.fillStyle = 'yellow';
         ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
-        console.log(`Bird drawn at (${bird.x}, ${bird.y})`);
+        console.log(`Drawing bird at x=${bird.x}, y=${bird.y}, width=${bird.width}, height=${bird.height} (reset)`);
 
         ctx.fillStyle = 'black';
         ctx.font = `${canvas.width * 0.05}px Arial`;
@@ -259,4 +285,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Start text drawn');
     }
 });
-
